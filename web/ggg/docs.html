@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$GTA6 Docs</title>
+  <meta name="description" content="How $GTA6 works: earning by playing GTA on Steam or Xbox, how draws are picked, your wallet, the reward pool, and the risks." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/svg+xml" href="/ggg/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ggg/ggg.css" />
+  <style>
+    .docs-top { position: sticky; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .docs-top .tag { font: 800 12px Inter, sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #000; background: var(--pink); padding: 4px 8px; border-radius: 4px; }
+    .docs-top .spacer { margin-left: auto; }
+    .docs { max-width: 1180px; margin: 0 auto; padding: 40px 24px 40px; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 56px; }
+    .toc { position: sticky; top: 90px; align-self: start; max-height: calc(100vh - 110px); overflow: auto; }
+    .toc { background: none; border: 0; border-radius: 0; padding: 0; margin: 0; }
+    .toc summary { display: none; }
+    .toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+    .toc a { display: block; padding: 6px 0 6px 16px; margin-left: -1px; border-left: 2px solid transparent; color: var(--dim); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .toc a:hover { color: #fff; }
+    .toc a.on { color: #fff; border-left-color: var(--pink); font-weight: 700; }
+    .doc { max-width: 760px; width: 100%; min-width: 0; margin: 0; padding: 0; }
+    .doc .hero-d { padding: 8px 0 8px; }
+    .doc h1 { font: 64px/0.95 Anton, Impact, sans-serif; text-transform: uppercase; margin: 6px 0 14px; letter-spacing: 0.5px; }
+    .doc h1 span { color: var(--pink); }
+    .doc section { margin: 0; padding: 44px 0 4px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+    .doc .hero-d + section { border-top: 0; }
+    .doc h2 { font: 34px/1.05 Anton, Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 14px; }
+    .doc h3 { font-size: 17px; margin: 26px 0 6px; }
+    .doc p, .doc li { color: #e9dfe5; }
+    .doc ol, .doc ul { padding-left: 22px; }
+    .doc li { margin: 6px 0; }
+    .doc code, .doc .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.86em; background: var(--panel2); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; word-break: break-all; }
+    .doc table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+    .doc th, .doc td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .doc th { color: var(--dim); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .tablewrap { overflow-x: auto; }
+    .note { margin: 18px 0; padding: 14px 16px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--pink); }
+    .note.warn { border-left-color: var(--sun); }
+    .note p { margin: 4px 0; }
+    .formula { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; white-space: pre; color: #fff; }
+    .addr { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 10px 0; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+    .addr .lbl { font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); min-width: 86px; }
+    .addr .mono { flex: 1; min-width: 0; }
+    .linkgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .linkgrid a { display: block; padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: #fff; text-decoration: none; font-weight: 700; }
+    .linkgrid a span { display: block; color: var(--dim); font-weight: 400; font-size: 13px; margin-top: 2px; }
+    .linkgrid a:hover { border-color: var(--pink); }
+    @media (max-width: 900px) {
+      .docs { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 20px 16px 32px; }
+      .toc { position: static; max-height: none; margin-bottom: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+      .toc summary { display: flex; cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+      .toc ol { margin-top: 10px; }
+      .doc h1 { font-size: 44px; }
+      .doc h2 { font-size: 28px; }
+      .linkgrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) { .docs-top .tag { display: none; } }
+  </style>
+</head>
+<body>
+  <header class="top solid" id="top">
+    <a href="/" class="logo" aria-label="gtasix.cash home"><span class="logo-a">GTASIX</span><span class="logo-b">.CASH</span></a>
+    <nav>
+      <a href="/play">Play to earn</a>
+      <a href="/#tokenomics">Tokenomics</a>
+      <a href="/holders">Holders</a>
+      <a href="/#buy-steps">How to buy</a>
+      <a href="/docs" class="on">Docs</a>
+    </nav>
+    <a class="btn small ghost xbtn" href="https://x.com/gtasixcash" target="_blank" rel="noopener" aria-label="$GTA6 on X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a class="btn small ghost" href="/play#account">Log in</a>
+    <a class="btn small" data-buy target="_blank" rel="noopener">Buy $GTA6</a>
+  </header>
+
+  <div class="docs">
+    <details class="toc" id="toc" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#quickstart">Quick start</a></li>
+        <li><a href="#games">Games &amp; platforms</a></li>
+        <li><a href="#privacy">Privacy settings</a></li>
+        <li><a href="#login">Logging in</a></li>
+        <li><a href="#wallet">Your wallet</a></li>
+        <li><a href="#draws">How draws work</a></li>
+        <li><a href="#verify">Check a draw yourself</a></li>
+        <li><a href="#pool">The reward pool</a></li>
+        <li><a href="#rules">Fair play</a></li>
+        <li><a href="#token">The $GTA6 token</a></li>
+        <li><a href="#kittymine">KittyMine</a></li>
+        <li><a href="#trust">Trust &amp; risks</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#links">Links</a></li>
+      </ol>
+    </details>
+
+    <main class="doc">
+      <div class="hero-d">
+        <p class="kicker">Documentation</p>
+        <h1>Get paid to <span>play GTA.</span></h1>
+        <p class="dim">Everything about how $GTA6 works: how you earn, how winners are picked, where the money comes from, and what can go wrong.</p>
+      </div>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>$GTA6 is a community memecoin on Solana that you earn by playing GTA. While you're in the game, you're entered in a draw that runs about once a minute. Each draw pays one player in $GTA6 from a public reward pool.</p>
+        <p>The pieces:</p>
+        <ul>
+          <li><strong>Your Steam or Xbox status</strong> shows that you're in GTA right now.</li>
+          <li><strong>A <a href="https://thekittymine.com" target="_blank" rel="noopener">KittyMine</a> block</strong>, made about once a minute, is the clock and the dice roll. Nobody can predict or choose its hash.</li>
+          <li><strong>The reward pool</strong> is a public Solana wallet holding the $GTA6 that gets paid out.</li>
+          <li><strong>The relay</strong> is our server. It watches the blocks, checks who's in-game, picks the winner and records the win.</li>
+        </ul>
+        <p>No mods, no downloads, nothing installed on your PC or console. You play like normal.</p>
+      </section>
+
+      <section id="quickstart">
+        <h2>Quick start</h2>
+        <p>The illustrated step-by-step guide for each platform is on <a href="/play">Play to Earn</a>. The short version:</p>
+        <ol>
+          <li><strong>Friend KittyMine.</strong> Steam: add <a href="https://steamcommunity.com/profiles/76561198779127606" target="_blank" rel="noopener">KittyMineCoin</a>. Xbox: add the gamertag <strong>TheKittyMine</strong> (watch the spelling: "KittyMine" without "The" is a different account). Wait until it's accepted.</li>
+          <li><strong>Make your game status public.</strong> See <a href="#privacy">Privacy settings</a>.</li>
+          <li><strong>Log in</strong> on <a href="/play#account">gtasix.cash</a> with Steam or Xbox. A $GTA6 wallet is made for you.</li>
+          <li><strong>Play GTA.</strong> Wins show up under "Winnings to collect". Collect them, then withdraw to any Solana wallet or export the key.</li>
+        </ol>
+        <div class="note"><p>You can start playing before you log in. Wins are saved to your Steam or Xbox account and wait there until you log in and collect.</p></div>
+      </section>
+
+      <section id="games">
+        <h2>Games &amp; platforms</h2>
+        <div class="tablewrap"><table>
+          <tr><th>Game</th><th>Platform</th><th>Counts?</th></tr>
+          <tr><td>GTA V Enhanced</td><td>Steam (PC)</td><td>Yes</td></tr>
+          <tr><td>GTA V Legacy</td><td>Steam (PC)</td><td>Yes</td></tr>
+          <tr><td>GTA V</td><td>Xbox</td><td>Yes</td></tr>
+          <tr><td>GTA VI</td><td>Xbox Series X|S</td><td>From launch, November 19</td></tr>
+          <tr><td>Anything</td><td>PlayStation</td><td>No. We have no way to see PlayStation status.</td></tr>
+          <tr><td>GTA V</td><td>Epic / Rockstar Launcher</td><td>No. Only Steam and Xbox are tracked.</td></tr>
+        </table></div>
+        <p>GTA Online counts too, since it runs inside GTA V. Your account carries over when you move from GTA V to GTA VI. Nothing to redo.</p>
+      </section>
+
+      <section id="privacy">
+        <h2>Privacy settings</h2>
+        <p>We can only see you if KittyMine's account is allowed to see what you're playing.</p>
+        <h3>Steam</h3>
+        <ol>
+          <li>Profile → <strong>Edit Profile</strong> → <strong>Privacy Settings</strong>.</li>
+          <li>Set <strong>My profile</strong> and <strong>Game details</strong> to <strong>Public</strong>.</li>
+          <li>Don't set yourself to "Invisible" in the friends list. Online, Away and Busy all work.</li>
+        </ol>
+        <h3>Xbox</h3>
+        <ol>
+          <li>Settings → <strong>Account</strong> → <strong>Privacy &amp; online safety</strong> → <strong>Xbox privacy</strong> → <strong>View details &amp; customize</strong>.</li>
+          <li>Under <strong>Online status &amp; history</strong>, set "Others can see if you're online" and "Others can see what you're watching and playing" to <strong>Everybody</strong>.</li>
+          <li>Don't "Appear offline".</li>
+        </ol>
+      </section>
+
+      <section id="login">
+        <h2>Logging in</h2>
+        <p>Logging in links your gaming account to a $GTA6 wallet. There's one wallet per Steam or Xbox account.</p>
+        <h3>Steam, option 1: Sign in through Steam</h3>
+        <p>You're sent to Steam's own site (steamcommunity.com) to log in. Steam only tells us your Steam ID. We never see your password.</p>
+        <h3>Steam, option 2: a code in your Real Name</h3>
+        <p>Enter your Steam ID (find it at steamid.io). You get a short code. Put it in your Steam profile's Real Name field, then press verify. You can remove it once you're in.</p>
+        <h3>Xbox: a code in your Bio</h3>
+        <p>Enter your gamertag. You get a short code. Put it in your Xbox Bio (Xbox app → Profile → Customize → Bio), then press verify. You can remove it once you're in.</p>
+        <div class="note"><p>Why a code? It proves you control that profile without ever giving us a password.</p></div>
+      </section>
+
+      <section id="wallet">
+        <h2>Your wallet</h2>
+        <p>When you log in, the site creates a Solana wallet for you so you can earn without any crypto setup. Its private key is stored encrypted on our server.</p>
+        <h3>Collect</h3>
+        <p>Wins first appear as <strong>Winnings to collect</strong>, a balance recorded under your Steam or Xbox account. <strong>Collect</strong> sends them from the reward pool to your wallet as real $GTA6 on Solana.</p>
+        <h3>Withdraw</h3>
+        <p>Send $GTA6 from your wallet to any Solana address, such as your Phantom wallet or an exchange that supports $GTA6. You don't need SOL: the pool pays the network fee. Limit: 10 withdrawals a day.</p>
+        <h3>Export private key</h3>
+        <p>Shows your wallet's private key so you can import it into Phantom and control it yourself. Anyone who sees that key can take everything in the wallet. Never share it, and never paste it anywhere except your own wallet app.</p>
+        <div class="note warn"><p><strong>Don't store a lot here.</strong> The site wallet is a convenience, not a vault. Withdraw or export regularly.</p></div>
+      </section>
+
+      <section id="draws">
+        <h2>How draws work</h2>
+        <p>Every time KittyMine makes a new block (about once a minute):</p>
+        <ol>
+          <li><strong>Who's in?</strong> We read KittyMine's Steam and Xbox friend lists and take everyone whose status shows a supported game right now.</li>
+          <li><strong>Sort.</strong> That list of players is sorted into a fixed order, so the same players always give the same list.</li>
+          <li><strong>Roll.</strong> The block's hash, combined with the $GTA6 contract address, picks one position in the list:</li>
+        </ol>
+        <div class="formula">winner = players[ sha256(blockHash + ":" + CA) mod playerCount ]</div>
+        <p>Because nobody knows the block hash before the block exists, nobody (including us) can steer who wins.</p>
+        <h3>How much a draw pays</h3>
+        <p>Every win pays a fixed <strong>1,000 $GTA6</strong>. There's no daily budget, no cap per player, and no end date: draws keep paying 1,000 each until the 100M reward pool is empty.</p>
+        <p>KittyMine makes a block about once a minute, so at most about 1,300 draws happen a day. Fewer players means more wins for each of them. If you're the only one in-game, you win every draw. Live numbers are on the <a href="/#stats">homepage</a>.</p>
+        <p>KittyMine "Legacy" blocks (from its old system) are skipped. If nobody is in-game, that block pays nobody.</p>
+      </section>
+
+      <section id="verify">
+        <h2>Check a draw yourself</h2>
+        <p>Every draw is listed live on the homepage with its block number, the winner and how many players were in it.</p>
+        <ol>
+          <li>Look up the block number on <a href="https://thekittymine.com/explorer" target="_blank" rel="noopener">KittyMine's explorer</a> and copy its hash.</li>
+          <li>Compute <code>sha256(hash + ":" + CA)</code>, read it as one big number, and take the remainder after dividing by the player count. That's the winner's position in the sorted list.</li>
+          <li>For each draw we also save a fingerprint (hash) of the player list we used, so the list can't be quietly changed later.</li>
+        </ol>
+        <div class="note"><p>What you can't check from outside is who was really in-game at that moment. That comes from Steam and Xbox, and only our server sees it. See <a href="#trust">Trust &amp; risks</a>.</p></div>
+      </section>
+
+      <section id="pool">
+        <h2>The reward pool</h2>
+        <p>The reward pool is a regular Solana wallet that holds the $GTA6 to be paid out, plus a little SOL for network fees. Every collect and every withdrawal fee comes out of it, and anyone can watch it on Solscan.</p>
+        <div class="addr"><span class="lbl">Pool wallet</span><span class="mono" id="d-escrow">loading…</span><a class="btn small ghost" id="d-escrow-link" target="_blank" rel="noopener">Solscan</a></div>
+        <p>The pool pays out over a set period, so the daily amount is fixed in advance. "Winnings to collect" are a promise against this pool until you collect them. Once collected, the $GTA6 is in your own wallet.</p>
+      </section>
+
+      <section id="rules">
+        <h2>Fair play</h2>
+        <ul>
+          <li>One wallet per Steam account and one per Xbox account.</li>
+          <li>Everyone in-game at a block has the same chance. Playtime before that block doesn't matter.</li>
+          <li>Idling in the menu still shows as in-game, and that counts. Being friended and offline doesn't.</li>
+        </ul>
+        <p>The relay also has anti-farming checks we can switch on if someone tries to game it with lots of fake accounts:</p>
+        <ul>
+          <li><strong>Account age:</strong> new Steam accounts can't win.</li>
+          <li><strong>Two checks in a row:</strong> you must be seen in-game in two status checks back to back, so popping in for a second doesn't count.</li>
+          <li><strong>Daily win cap:</strong> a limit on wins per account per day.</li>
+        </ul>
+        <p>Right now these are <strong>off</strong>. If we switch any on, we'll announce it on <a href="https://x.com/gtasixcash" target="_blank" rel="noopener">X</a> first.</p>
+      </section>
+
+      <section id="token">
+        <h2>The $GTA6 token</h2>
+        <div class="addr"><span class="lbl">CA</span><span class="mono" id="d-ca">loading…</span><button class="btn small" id="d-copy">Copy</button></div>
+        <ul>
+          <li>Launched on <a data-buy target="_blank" rel="noopener">pump.fun</a>, on Solana.</li>
+          <li>Always check that the CA matches the one on gtasix.cash before buying. Copycat tokens with the same name exist on every launchpad.</li>
+          <li>$GTA6 has no intrinsic value and comes with no promise of returns. It's a memecoin.</li>
+        </ul>
+        <h3>How to buy</h3>
+        <ol>
+          <li>Install <a href="https://phantom.com" target="_blank" rel="noopener">Phantom</a> or any Solana wallet.</li>
+          <li>Get SOL into it, either by buying in the wallet or sending from an exchange.</li>
+          <li>Open <a data-buy target="_blank" rel="noopener">$GTA6 on pump.fun</a>, connect, and swap SOL for $GTA6.</li>
+        </ol>
+      </section>
+
+      <section id="kittymine">
+        <h2>KittyMine</h2>
+        <p><a href="https://thekittymine.com" target="_blank" rel="noopener">KittyMine</a> is a separate "proof-of-game" network: its blocks are mined by people playing games while friended to its Steam or Xbox account, not by computers solving puzzles. It has its own coin, KMCoin.</p>
+        <p>We use KittyMine's public blocks as a fair clock and dice roll, and its friend lists as our player list. Since you're friended to KittyMine anyway, your GTA time can also win KittyMine blocks and KMCoin, on top of $GTA6.</p>
+        <p>Curious how a blockchain can run on gamers? Ask in the <a href="https://discord.com/invite/FgZJYVKY6N" target="_blank" rel="noopener">Discord</a>.</p>
+        <p>$GTA6 isn't run by KittyMine, and KittyMine doesn't hold or pay $GTA6.</p>
+      </section>
+
+      <section id="trust">
+        <h2>Trust &amp; risks</h2>
+        <p>Here's what you're trusting:</p>
+        <ul>
+          <li><strong>Our server holds keys.</strong> The reward pool and the site wallets are controlled by keys on our server. If the server were hacked or the team went bad, those funds could be lost. That's why the site says to withdraw or export instead of leaving large amounts.</li>
+          <li><strong>Who was in-game is reported by us.</strong> The dice roll is public, but the player list comes from Steam and Xbox through our server. We save a fingerprint of every list, but you can't check it against Steam or Xbox yourself.</li>
+          <li><strong>We depend on Steam, Xbox and KittyMine.</strong> If any of them goes down or changes how it works, draws can pause.</li>
+          <li><strong>The pool is finite.</strong> When it runs out, payouts stop unless it's refilled.</li>
+          <li><strong>It's a memecoin.</strong> The price can go to zero. Only use money you can afford to lose.</li>
+        </ul>
+        <p>Next, we want to move more of this on-chain, so that claims are paid by a Solana program instead of a server key.</p>
+        <div class="note warn"><p><strong>Not affiliated with Rockstar Games or Take-Two Interactive.</strong> Grand Theft Auto, GTA and GTA VI are their trademarks. We don't use their art, and we have no link to them. Not financial advice.</p></div>
+      </section>
+
+      <section id="troubleshooting">
+        <h2>Troubleshooting</h2>
+        <h3>I'm playing but never show up as in-game</h3>
+        <ul>
+          <li>Check that KittyMine actually accepted your friend request: it should be in your friends list, not "pending". Requests are accepted by hand, so post your Steam name or gamertag in the <a href="https://discord.com/invite/FgZJYVKY6N" target="_blank" rel="noopener">KittyMine Discord</a>.</li>
+          <li>Check your <a href="#privacy">privacy settings</a>. This is the most common cause.</li>
+          <li>Xbox: make sure you added <strong>TheKittyMine</strong>, not "KittyMine".</li>
+          <li>Steam: the game has to be launched through Steam so it shows as "Playing".</li>
+          <li>Status updates every minute or so. Give it a couple of minutes after you start the game.</li>
+          <li>Check whether KittyMine sees you at all: your ID should appear on its <a href="https://thekittymine.com/explorer/player-info" target="_blank" rel="noopener">player info page</a> once you're friends and playing.</li>
+        </ul>
+        <h3>The Steam or Xbox code won't verify</h3>
+        <p>Save your profile after pasting the code, then wait a minute: Steam and Xbox can take a moment to show the change. Make sure the code is exact, with no extra spaces.</p>
+        <h3>A withdrawal failed</h3>
+        <p>Check the address is a Solana address, not an ETH one or another chain's. If it still fails, the pool may be low on SOL for fees. Tell us on <a href="https://x.com/gtasixcash" target="_blank" rel="noopener">X</a>.</p>
+      </section>
+
+      <section id="links">
+        <h2>Links</h2>
+        <div class="linkgrid">
+          <a href="/">gtasix.cash<span>Earn, log in, live draws</span></a>
+          <a href="https://x.com/gtasixcash" target="_blank" rel="noopener">X / Twitter<span>@gtasixcash</span></a>
+          <a data-buy target="_blank" rel="noopener">pump.fun<span>Buy $GTA6</span></a>
+          <a href="https://thekittymine.com/explorer" target="_blank" rel="noopener">KittyMine explorer<span>Every block and its hash</span></a>
+          <a href="https://thekittymine.com" target="_blank" rel="noopener">KittyMine<span>The proof-of-game network</span></a>
+          <a href="https://discord.com/invite/FgZJYVKY6N" target="_blank" rel="noopener">Discord<span>KMCoin, proof-of-game &amp; web3 talk</span></a>
+          <a id="d-pool-card" target="_blank" rel="noopener">Reward pool<span>On Solscan</span></a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="foot">
+    <a href="/" class="logo small"><span class="logo-a">GTASIX</span><span class="logo-b">.CASH</span></a>
+    <p>$GTA6 is an independent community memecoin with no intrinsic value or expectation of financial return. It is <strong>not affiliated with, endorsed by, or connected to Rockstar Games or Take-Two Interactive</strong>. Grand Theft Auto, GTA and GTA VI are their trademarks. Not financial advice.</p>
+  </footer>
+
+  <script type="module">
+    const $ = (s) => document.querySelector(s);
+    const [site, cfg] = await Promise.all([
+      fetch("/api/site").then((r) => r.json()).catch(() => ({})),
+      fetch("/api/config").then((r) => r.json()).catch(() => ({})),
+    ]);
+    const ca = site.mint || "CbNEGX1EqVy1BQN12NbanuCubvWZULBztXwNd7QDpump";
+    $("#d-ca").textContent = ca;
+    document.querySelectorAll("[data-buy]").forEach((a) => (a.href = "https://pump.fun/coin/" + ca));
+    $("#d-copy").onclick = async (e) => {
+      try { await navigator.clipboard.writeText(ca); e.target.textContent = "Copied"; setTimeout(() => (e.target.textContent = "Copy"), 1500); } catch {}
+    };
+    if (cfg.escrow) {
+      const url = "https://solscan.io/account/" + cfg.escrow;
+      $("#d-escrow").textContent = cfg.escrow;
+      $("#d-escrow-link").href = url;
+      $("#d-pool-card").href = url;
+    } else {
+      $("#d-escrow").textContent = "Shown on the homepage FAQ";
+      $("#d-escrow-link").remove();
+      $("#d-pool-card").href = "/#faq";
+    }
+    // highlight the section being read; close the mobile menu after a tap
+    const links = [...document.querySelectorAll(".toc a")];
+    const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) { links.forEach((l) => l.classList.remove("on")); byId.get(e.target.id)?.classList.add("on"); } });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    document.querySelectorAll(".doc section[id]").forEach((s) => io.observe(s));
+    const toc = $("#toc");
+    if (matchMedia("(max-width: 900px)").matches) toc.open = false;
+    links.forEach((a) => a.addEventListener("click", () => { if (matchMedia("(max-width: 900px)").matches) toc.open = false; }));
+  </script>
+</body>
+</html>

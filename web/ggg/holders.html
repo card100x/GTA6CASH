@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$GTA6 Holder Rewards</title>
+  <meta name="description" content="50% of $GTA6 trading fees go to the top 100 holders every 5 minutes, paid in TTWO. Live top 100, every payout and its transaction." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/svg+xml" href="/ggg/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ggg/ggg.css" />
+  <style>
+    .split { display: grid; grid-template-columns: 50fr 30fr 20fr; gap: 6px; margin: 18px 0 10px; }
+    .split > div { border-radius: 12px; padding: 16px; min-width: 0; }
+    .split b { display: block; font: 40px/1 Anton, Impact, sans-serif; }
+    .split span { display: block; font-size: 13px; font-weight: 700; margin-top: 4px; }
+    .split a { font-size: 12px; color: inherit; opacity: 0.85; word-break: break-all; }
+    .sp-h { background: var(--pink); color: #000; }
+    .sp-b { background: #2a1a24; border: 1px solid rgba(255, 79, 174, 0.4); }
+    .sp-d { background: var(--panel2); border: 1px solid var(--line); }
+    .mine { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .mine > div { background: #08060a; border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .mine b { display: block; font: 28px/1.1 Anton, Impact, sans-serif; color: var(--cash); }
+    .mine span { color: var(--dim); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .top100 td.r { color: var(--dim); width: 44px; }
+    .top100 tr.me td { background: rgba(255, 0, 140, 0.12); }
+    .bar { height: 6px; border-radius: 3px; background: var(--pink); min-width: 2px; }
+    .round { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--panel); }
+    .round summary { padding: 14px 16px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .round summary::after { margin-left: auto; }
+    .round .rbody { padding: 0 16px 14px; }
+    .round { padding: 0; }
+    .pill { font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }
+    .pill.g { color: var(--good); border-color: rgba(123, 211, 107, 0.4); }
+    .formula2 { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; overflow-x: auto; white-space: pre; }
+    @media (max-width: 760px) {
+      .split { grid-template-columns: 1fr; }
+      .mine { grid-template-columns: 1fr; }
+      .top100 .hide-m { display: none; }
+    }
+  </style>
+</head>
+<body data-page="holders">
+  <header class="top solid" id="top">
+    <a href="/" class="logo" aria-label="gtasix.cash home"><span class="logo-a">GTASIX</span><span class="logo-b">.CASH</span></a>
+    <nav>
+      <a href="/play">Play to earn</a>
+      <a href="/holders" class="on">Holders</a>
+      <a href="/#tokenomics">Tokenomics</a>
+      <a href="/#buy-steps">How to buy</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <a class="btn small ghost xbtn" href="https://x.com/gtasixcash" target="_blank" rel="noopener" aria-label="$GTA6 on X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a class="btn small ghost" href="/play#account">Log in</a>
+    <a class="btn small" data-buy target="_blank" rel="noopener">Buy $GTA6</a>
+  </header>
+
+  <div class="page-hero">
+    <p class="kicker">Holder rewards</p>
+    <h1>Hold $GTA6.<br /><span>Get paid in TTWO.</span></h1>
+    <p class="lead">Half of every $GTA6 trading fee goes to the top 100 holders, every 5 minutes, paid in TTWO, the tokenized Take-Two stock. No staking, no claiming: just hold.</p>
+    <div class="facts"><span>Top 100 holders</span><span>Paid every 5 minutes</span><span>Counted every minute</span><span>Paid in TTWO</span></div>
+  </div>
+
+  <main>
+    <section class="stats" style="margin-top:36px">
+      <div class="stat"><div class="v" id="h-paid">…</div><div class="k">paid to holders</div></div>
+      <div class="stat"><div class="v" id="h-usd">…</div><div class="k">worth today</div></div>
+      <div class="stat"><div class="v" id="h-next">…</div><div class="k">next payout in</div></div>
+      <div class="stat"><div class="v" id="h-pct">…</div><div class="k">held by the top 100</div></div>
+    </section>
+
+    <section id="mine" class="checker" style="margin-top:40px">
+      <p class="kicker">My rewards</p>
+      <h2 style="font-size:clamp(30px,4vw,44px)">Am I in the top 100?</h2>
+      <p class="dim" style="margin-top:0">Paste the Solana wallet that holds your $GTA6.</p>
+      <div class="row2"><input id="mw" type="text" placeholder="Your wallet address" autocomplete="off" /><button class="btn" id="mgo">Check</button></div>
+      <div id="mout"></div>
+    </section>
+
+    <section id="split">
+      <p class="kicker">Where the fees go</p>
+      <h2>The split. Locked forever.</h2>
+      <p class="dim narrow">Every $GTA6 trade pays a 1% creator fee in TTWO. pump.fun splits it three ways on-chain, and that split can never be changed by anyone.</p>
+      <div class="split">
+        <div class="sp-h"><b>50%</b><span>Top 100 holders</span><a target="_blank" rel="noopener" href="https://solscan.io/account/AFtbtx5bqHkdim1217zJcuiyxLURS6sBcUTEz7hDtX2X">AFtbtx…tX2X</a></div>
+        <div class="sp-b"><b>30%</b><span>$KMC buybacks</span><a target="_blank" rel="noopener" href="https://solscan.io/account/ARKjvKzH86pjKXrm1PEHYGGZKXjoYTgTYzZpy1jpqm6k">ARKj…qm6k</a></div>
+        <div class="sp-d"><b>20%</b><span>Dev &amp; marketing</span><a target="_blank" rel="noopener" href="https://solscan.io/account/ooytx29dCErxKyjfL7rJFqjsZdvNBmLYP2vP5EDayrQ">ooyt…ayrQ</a></div>
+      </div>
+      <p class="hint">Check it yourself: the split lives in pump.fun's fee-sharing account <a class="mono" target="_blank" rel="noopener" href="https://solscan.io/account/EmxjAbsAHLinYTc5hja1f6VgfXAZUvxJorLsoc85TThE">EmxjAb…TThE</a>.</p>
+    </section>
+
+    <section id="how">
+      <p class="kicker">How it's split</p>
+      <h2>Your share = your bag.</h2>
+      <ol class="steps" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <li><b>1</b><div><h3>Counted every minute</h3><p>Every minute we take the 100 biggest $GTA6 wallets. Pools, the reward pool and the team wallets don't count, so it's always 100 real holders.</p></div></li>
+        <li><b>2</b><div><h3>Share of the top 100</h3><p>Your share is your bag divided by everything the top 100 hold together. If the top 100 hold 70% of the supply and you hold 3%, you get 3 ÷ 70 = <strong>4.29%</strong> of every payout.</p></div></li>
+        <li><b>3</b><div><h3>Paid every 5 minutes</h3><p>Every 5 minutes the fees are claimed and split over the five minute snapshots, so holding all the time beats buying right before a payout.</p></div></li>
+        <li><b>4</b><div><h3>Straight to your wallet</h3><p>TTWO lands in the wallet that holds your $GTA6. Shares under $0.10 roll over to the next round so they aren't eaten by fees.</p></div></li>
+      </ol>
+      <div class="formula2" style="margin-top:16px">your payout = round fees × (your $GTA6 ÷ $GTA6 held by the top 100)</div>
+    </section>
+
+    <section id="top100">
+      <p class="kicker">Live</p>
+      <h2>The top 100.</h2>
+      <p class="dim narrow" id="t-sub">Updated every minute.</p>
+      <div class="panel" style="padding:10px 16px"><div class="tablewrap"><table class="top100"><thead><tr><th>#</th><th>Wallet</th><th class="hide-m">$GTA6</th><th>Share of payouts</th><th class="hide-m"></th></tr></thead><tbody id="t-body"><tr><td colspan="5" class="dim">Loading…</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="payouts">
+      <p class="kicker">Receipts</p>
+      <h2>Every payout.</h2>
+      <p class="dim narrow">Each round: the fees claimed from pump.fun, who got what, and the transactions. Tap a round for details.</p>
+      <div id="rounds"><span class="dim">Loading…</span></div>
+    </section>
+
+    <section id="trust">
+      <p class="kicker">Trust</p>
+      <h2>What you're trusting.</h2>
+      <p class="dim narrow">The 50/30/20 split is locked on-chain by pump.fun. The holder payouts are sent by our server from the holder wallet, which anyone can watch on <a target="_blank" rel="noopener" href="https://solscan.io/account/AFtbtx5bqHkdim1217zJcuiyxLURS6sBcUTEz7hDtX2X">Solscan</a>: every fee that comes in and every payout that goes out. Each round lists a fingerprint (hash) of the holder list it used. A little TTWO is swapped for SOL now and then to pay network fees, and that's shown in the totals. TTWO is issued by Backpack, which can freeze or pause its token, as with any tokenized stock. More in the <a href="/docs#trust">Docs</a>.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a href="/" class="logo small"><span class="logo-a">GTASIX</span><span class="logo-b">.CASH</span></a>
+    <p class="socials"><a href="https://x.com/gtasixcash" target="_blank" rel="noopener">@gtasixcash</a> <a href="https://discord.com/invite/FgZJYVKY6N" target="_blank" rel="noopener">Discord</a> <a href="/docs">Docs</a></p>
+    <p>$GTA6 is an independent community memecoin with no intrinsic value or expectation of financial return. It is <strong>not affiliated with, endorsed by, or connected to Rockstar Games or Take-Two Interactive</strong>. Grand Theft Auto, GTA and GTA VI are their trademarks. TTWO is a tokenized stock issued by Backpack, not by us. Not financial advice.</p>
+  </footer>
+
+  <script type="module">
+    const $ = (s) => document.querySelector(s);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+    const short = (s) => (s && s.length > 12 ? `${s.slice(0, 4)}…${s.slice(-4)}` : s);
+    const solscan = (a, kind = "account") => `https://solscan.io/${kind}/${a}`;
+    let S = null;
+    const q = (raw) => Number(BigInt(raw ?? 0)) / 10 ** (S?.quoteDecimals ?? 6);
+    const fmtQ = (raw) => { const n = q(raw); return n >= 100 ? n.toFixed(2) : n >= 1 ? n.toFixed(3) : n.toFixed(5); };
+    const usd = (raw) => S?.priceUsd ? "$" + (q(raw) * S.priceUsd).toLocaleString("en-US", { maximumFractionDigits: q(raw) * S.priceUsd < 10 ? 2 : 0 }) : "";
+    const tokens = (raw) => Number(BigInt(raw ?? 0)) / 1e6;
+    const big = (n) => n >= 1e6 ? (n / 1e6).toFixed(2) + "M" : n >= 1e3 ? (n / 1e3).toFixed(1) + "K" : n.toFixed(0);
+    const ago = (ms) => { const s = Math.max(1, Math.round((Date.now() - ms) / 1000)); return s < 60 ? `${s}s ago` : s < 3600 ? `${Math.round(s / 60)}m ago` : s < 86400 ? `${Math.round(s / 3600)}h ago` : `${Math.round(s / 86400)}d ago`; };
+    const site = await fetch("/api/site").then((r) => r.json()).catch(() => ({}));
+    if (site.mint) document.querySelectorAll("[data-buy]").forEach((a) => (a.href = "https://pump.fun/coin/" + site.mint));
+    let myWallet = "";
+    try { myWallet = localStorage.getItem("gta6_wallet") ?? ""; } catch {}
+    if (myWallet) $("#mw").value = myWallet;
+
+    function renderTop() {
+      const top = S.top ?? [];
+      $("#t-sub").textContent = top.length ? `${top.length} wallets, holding ${S.topTotalPct ?? "?"}% of the supply together. Updated ${ago(S.lastSnapAt)}.` : "No eligible holders yet.";
+      const maxShare = Math.max(...top.map((h) => h.sharePct), 1);
+      $("#t-body").innerHTML = top.length ? top.map((h) => `<tr class="${h.owner === myWallet ? "me" : ""}"><td class="r">${h.rank}</td><td><a class="mono" target="_blank" rel="noopener" href="${solscan(esc(h.owner))}">${esc(short(h.owner))}</a></td><td class="hide-m">${big(tokens(h.amount))} <span class="dim">(${h.supplyPct}%)</span></td><td><strong>${h.sharePct.toFixed(2)}%</strong></td><td class="hide-m" style="width:30%"><div class="bar" style="width:${(h.sharePct / maxShare) * 100}%"></div></td></tr>`).join("") : `<tr><td colspan="5" class="dim">Nobody yet. Buy $GTA6 to be first.</td></tr>`;
+    }
+    function renderRounds() {
+      const rs = (S.rounds ?? []).filter((r) => r.claimSig || r.payouts.length || r.errors?.length).slice(0, 25);
+      if (!rs.length) return void ($("#rounds").innerHTML = `<span class="dim">No payouts yet. The first one goes out after the first trades.</span>`);
+      $("#rounds").innerHTML = rs.map((r) => {
+        const total = r.payouts.reduce((a, p) => a + BigInt(p.amount), 0n);
+        const txs = [...new Set(r.payouts.map((p) => p.sig))];
+        return `<details class="round"><summary><span class="pill g">${ago(r.at)}</span><strong>${fmtQ(total)} TTWO</strong><span class="dim">${usd(total)} to ${r.payouts.length} holders</span>${r.claimSig ? `<a target="_blank" rel="noopener" href="${solscan(esc(r.claimSig), "tx")}">fee claim tx</a>` : ""}</summary>
+          <div class="rbody">
+            <p class="hint">Fees in this round: ${fmtQ(r.income)} TTWO over ${r.snaps} snapshots · carried to next round: ${fmtQ(r.carried)} TTWO · payout txs: ${txs.map((t, i) => `<a target="_blank" rel="noopener" href="${solscan(esc(t), "tx")}">${i + 1}</a>`).join(" ")}</p>
+            <div class="tablewrap"><table><tr><th>Wallet</th><th>TTWO</th><th></th></tr>${r.payouts.map((p) => `<tr class="${p.owner === myWallet ? "me" : ""}"><td class="mono">${esc(short(p.owner))}</td><td>${fmtQ(p.amount)}</td><td><a target="_blank" rel="noopener" href="${solscan(esc(p.sig), "tx")}">tx</a></td></tr>`).join("")}</table></div>
+            <p class="hint">Snapshot fingerprints: <span class="mono">${(r.snapshotHashes ?? []).map((h) => esc(h.slice(0, 10))).join(" · ")}</span></p>
+          </div></details>`;
+      }).join("");
+    }
+    async function load() {
+      const s = await fetch("/hapi/state").then((r) => r.json()).catch(() => null);
+      if (!s) return void ($("#rounds").innerHTML = `<span class="dim">The payout server didn't answer. Try again in a minute.</span>`);
+      S = s;
+      $("#h-paid").textContent = fmtQ(S.totals.paid) + " TTWO";
+      $("#h-usd").textContent = usd(S.totals.paid) || "…";
+      $("#h-pct").textContent = (S.topTotalPct ?? 0) + "%";
+      renderTop();
+      renderRounds();
+      if (myWallet) check(false);
+    }
+    setInterval(() => {
+      if (!S) return;
+      const ms = S.nextSendAt - Date.now();
+      $("#h-next").textContent = ms > 0 ? `${Math.floor(ms / 60000)}:${String(Math.floor((ms % 60000) / 1000)).padStart(2, "0")}` : "now";
+    }, 1000);
+    async function check(scroll = true) {
+      const w = $("#mw").value.trim();
+      if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(w)) return void ($("#mout").innerHTML = `<div class="chk bad">That doesn't look like a Solana address.</div>`);
+      myWallet = w;
+      try { localStorage.setItem("gta6_wallet", w); } catch {}
+      const o = await fetch("/hapi/owed/" + encodeURIComponent(w)).then((r) => r.json()).catch(() => null);
+      const paid = (S?.rounds ?? []).flatMap((r) => r.payouts).filter((p) => p.owner === w).reduce((a, p) => a + BigInt(p.amount), 0n);
+      if (!o) return void ($("#mout").innerHTML = `<div class="chk bad">The payout server didn't answer. Try again in a minute.</div>`);
+      const rank = o.rank;
+      $("#mout").innerHTML = `${rank ? `<div class="chk ok"><b>✓ You're #${rank.rank} in the top 100.</b> You get ${rank.sharePct.toFixed(2)}% of every payout.</div>` : `<div class="chk warn"><b>Not in the top 100 right now.</b> ${S?.top?.length ? `The #${S.top.length} wallet holds ${big(tokens(S.top[S.top.length - 1].amount))} $GTA6.` : ""} Excluded wallets (pools, team) never count.</div>`}
+        <div class="mine"><div><span>Rank</span><b>${rank ? "#" + rank.rank : "–"}</b></div><div><span>Waiting for next payout</span><b>${fmtQ(o.owed)} TTWO</b></div><div><span>Received (recent rounds)</span><b>${fmtQ(paid)} TTWO</b></div></div>`;
+      renderTop();
+      if (scroll) $("#mout").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    $("#mgo").onclick = () => check();
+    $("#mw").addEventListener("keydown", (e) => e.key === "Enter" && check());
+    load();
+    setInterval(load, 30_000);
+  </script>
+</body>
+</html>

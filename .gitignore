@@ -1,0 +1,13 @@
+# secrets / wallets / player data - NEVER commit
+**/keys/
+**/data/
+*.key
+.env
+.env.*
+!.env.example
+
+# build / tooling
+node_modules/
+.vercel/
+.fly/
+*.log

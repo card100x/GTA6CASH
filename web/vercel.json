@@ -1,0 +1,40 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://gtasix-relay.fly.dev/api/:path*"
+    },
+    {
+      "source": "/hapi/:path*",
+      "destination": "https://gtasix-holders.fly.dev/api/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/ggg/index.html"
+    },
+    {
+      "source": "/play",
+      "destination": "/ggg/play.html"
+    },
+    {
+      "source": "/holders",
+      "destination": "/ggg/holders.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/ggg/docs.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

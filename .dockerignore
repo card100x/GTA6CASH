@@ -1,0 +1,7 @@
+relay/node_modules
+relay/data
+relay/keys
+relay/.env
+**/*.log
+*.log
+.git

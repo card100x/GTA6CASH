@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KMC Launchpad</title>
+  <meta name="description" content="Launch a coin that people mine by playing games. Powered by KittyMine proof-of-game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="top">
+    <a href="#/" class="brand"><span class="paw">🐾</span> KMC<span class="dim">launchpad</span></a>
+    <nav>
+      <a href="#/">Coins</a>
+      <a href="#/launch">Launch</a>
+      <a href="#/mine">Mine</a>
+    </nav>
+    <button id="wallet" class="btn small">Connect wallet</button>
+  </header>
+  <main id="app"></main>
+  <footer class="foot">
+    <span>Mining verified by <a href="https://thekittymine.com" target="_blank" rel="noopener">KittyMine</a> proof-of-game · coins trade on pump.fun</span>
+    <span id="cluster" class="dim"></span>
+  </footer>
+  <div id="toast" class="toast" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
